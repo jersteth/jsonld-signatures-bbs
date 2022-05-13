@@ -47,8 +47,7 @@ export class BbsBlsSignatureProof2020 extends suites.LinkedDataProof {
       ],
       type: "BbsBlsSignatureProof2020"
     };
-    this.mappedDerivedProofType =
-      "https://w3id.org/security#BbsBlsSignature2020";
+    this.mappedDerivedProofType = "BbsBlsSignature2020";
     this.supportedDeriveProofType =
       BbsBlsSignatureProof2020.supportedDerivedProofType;
 
