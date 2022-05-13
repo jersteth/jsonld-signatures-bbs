@@ -17,7 +17,7 @@
     "typescript": "3.7.5"
   },
   "dependencies": {
-    "@mattrglobal/jsonld-signatures-bbs": "0.10.0",
+    "@mattrglobal/jsonld-signatures-bbs": "https://github.com/pcibraro/jsonld-signatures-bbs.git",
     "@mattrglobal/node-bbs-signatures": "0.12.0",
     "jsonld": "5.2.0",
     "jsonld-signatures": "9.3.1"
