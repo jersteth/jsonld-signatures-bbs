@@ -30,7 +30,7 @@ import { Bls12381G2KeyPair } from "@mattrglobal/bls12381-key-pair";
 export class BbsBlsSignatureProof2020 extends suites.LinkedDataProof {
   constructor({ useNativeCanonize, key, LDKeyClass }: any = {}) {
     super({
-      type: "sec:BbsBlsSignatureProof2020"
+      type: "BbsBlsSignatureProof2020"
     });
 
     this.proof = {
