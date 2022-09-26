@@ -406,7 +406,7 @@ export class BbsBlsSignatureProof2020 extends suites.LinkedDataProof {
 
     // Note: `expansionMap` is intentionally not passed; we can safely drop
     // properties here and must allow for it
-    const result = await jsonld.frame(
+    let result = await jsonld.frame(
       verificationMethod,
       {
         // adding jws-2020 context to allow publicKeyJwk
@@ -423,10 +423,12 @@ export class BbsBlsSignatureProof2020 extends suites.LinkedDataProof {
         expandContext: SECURITY_CONTEXT_URL
       }
     );
+
+    result = (await documentLoader(result.id)).document;
+
     if (!result) {
       throw new Error(`Verification method ${verificationMethod} not found.`);
     }
-
     // ensure verification method has not been revoked
     if (result.revoked !== undefined) {
       throw new Error("The verification method has been revoked.");

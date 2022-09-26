@@ -12,6 +12,8 @@
  */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { DidDocumentPublicKey } from "./DidDocumentPublicKey";
+
 /**
  * Options for verifying a signature
  */
@@ -27,7 +29,7 @@ export interface VerifySignatureOptions {
   /**
    * Verification method to verify the signature against
    */
-  readonly verificationMethod: string;
+  readonly verificationMethod: DidDocumentPublicKey;
   /**
    * Proof to verify
    */

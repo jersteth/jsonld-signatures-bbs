@@ -351,7 +351,7 @@ export class BbsBlsSignature2020 extends suites.LinkedDataProof {
 
     // Note: `expansionMap` is intentionally not passed; we can safely drop
     // properties here and must allow for it
-    const result = await jsonld.frame(
+    let result = await jsonld.frame(
       verificationMethod,
       {
         "@context": SECURITY_CONTEXT_URL,
@@ -364,10 +364,11 @@ export class BbsBlsSignature2020 extends suites.LinkedDataProof {
         expandContext: SECURITY_CONTEXT_URL
       }
     );
+
+    result = (await documentLoader(result.id)).document;
     if (!result) {
       throw new Error(`Verification method ${verificationMethod} not found.`);
     }
-
     // ensure verification method has not been revoked
     if (result.revoked !== undefined) {
       throw new Error("The verification method has been revoked.");
@@ -409,7 +410,10 @@ export class BbsBlsSignature2020 extends suites.LinkedDataProof {
     let { verifier } = this;
 
     if (!verifier) {
-      const key = await this.LDKeyClass.from(verificationMethod);
+      // Construct a key pair class from the returned verification method
+      const key = verificationMethod.publicKeyJwk
+        ? await this.LDKeyClass.fromJwk(verificationMethod)
+        : await this.LDKeyClass.from(verificationMethod);
       verifier = key.verifier(key, this.alg, this.type);
     }
 
